@@ -23,8 +23,8 @@ To train the model, run the following command:
 
 1. Clone the repository in your anaconda prompt
 ```bash
-git clone https://github.com/2002Calvin/CNN-Traffic-Model.git
-cd CNN-Traffic_Model
+git clone https://github.com/JONATHANZALI/Neural-Networks.git
+cd Neural-Networks
 ```
 
 2. activate tensorflow environment
@@ -39,16 +39,15 @@ pip install pillow numpy sklearn
 
 5. Train the model
 ```bash
-cd NGUENE
+cd ZALI
 python traffic.py path/to/data_directory path/to/model.h5
 ```
 
 6. Use the model
-Still within CALEB directory
+Still within ZALI directory
 ```bash
 python predict_sign.py path/to/model
 ```
-
 
 ## Training Configuration
 - Number of Epochs: You can adjust the number of epochs in train.py to optimize performance.
