@@ -5,11 +5,11 @@ import sys
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-EPOCHS = 10
+EPOCHS = 15
 IMG_WIDTH= 30
 IMG_HEIGHT = 30
 NUM_CATEGORIES = 43
-TEST_SIZE = 0.4
+TEST_SIZE = 0.3
 
 def main():
     # Check command-line arguments
@@ -66,9 +66,6 @@ def load_data(data_dir):
                 
                 # Resize image
                 image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT))
-                
-                # image normalization
-                image = image / 255.0
                                 
                 # Append images and labels to the respective list
                 images.append(image)
@@ -91,14 +88,14 @@ def get_model():
         # Add a max-pooling layer with a 2x2 pool size
         model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
         
-        # # Add a dropout layer to reduce overfitting
-        # model.add(tf.keras.layers.Dropout(0.3))
+        # Add a dropout layer to reduce overfitting
+        model.add(tf.keras.layers.Dropout(0.3))
         
         model.add(tf.keras.layers.Conv2D(64, (3, 3), activation="relu"))
         model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
         
         # Add a dropout layer to reduce overfitting
-        # model.add(tf.keras.layers.Dropout(0.3))
+        model.add(tf.keras.layers.Dropout(0.3))
         
         model.add(tf.keras.layers.Flatten())
         

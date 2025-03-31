@@ -19,7 +19,7 @@ MODEL_PATH = os.path.join(CURRENT_DIR,"best_model.h5")
 model = load_model(MODEL_PATH)
 
 # String representation of the gtsrb dataset categories
-CATEGORY_STRINGS = [
+CATEGORIES = [
     "Speed limit (20km/h)",
     "Speed limit (30km/h)",
     "Speed limit (50km/h)",
@@ -65,7 +65,7 @@ CATEGORY_STRINGS = [
     "End of no passing by vehicles over 3.5 metric tons"
 ]
 
-def predictor_function(image_path):
+def predict(image_path):
     """
     Predict the category of the traffic sign in the given image file.
     """
@@ -81,13 +81,13 @@ def predictor_function(image_path):
         predicted_category = np.argmax(predictions)
         accuracy = np.max(predictions)
 
-        return predicted_category, CATEGORY_STRINGS[predicted_category], accuracy
+        return predicted_category, CATEGORIES[predicted_category], accuracy
     
     except Exception as e:
         messagebox.showerror("Error", f"Failed to predict image: {e}")
         return None
 
-def file_opener():
+def file_handler():
     """
     Open a file dialog to select an image and display the prediction.
     """
@@ -107,7 +107,7 @@ def file_opener():
         image_label.image = photo
 
         # Predict the traffic sign category
-        number, sign, probability  = predictor_function(file_path)
+        number, sign, probability  = predict(file_path)
         if sign and probability:
             results = f"Prediction \n Sign: {sign}, Accuracy: {probability:.2f}"
             result_label.config(text=results)
@@ -118,19 +118,19 @@ def file_opener():
 root = tk.Tk()
 root.title("Road Sign Predictor")
 
-root.geometry("500x500")
+root.geometry("400x400")
 
 # Create and place widgets
 frame = tk.Frame(root)
 frame.pack(pady=20)
 
-text_label = tk.Label(frame, text="Upload A Traffic Sign Image", font=("Arial", 14, "bold"))
+text_label = tk.Label(frame, text="Upload Traffic Sign", font=("Arial", 14, "bold"))
 text_label.pack()
 
 image_label = tk.Label(frame)
 image_label.pack(pady=10)
 
-button = tk.Button(frame, text="Select Image", command=file_opener)
+button = tk.Button(frame, text="Select Image", command=file_handler)
 button.pack(pady=10)
 
 
